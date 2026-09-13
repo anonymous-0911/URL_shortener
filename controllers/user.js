@@ -22,7 +22,7 @@ async function handleUserLogin(req, res) {
     });
 
   const sessionId = uuidv4();
-  setUser(sessionId, user);
+  await setUser(sessionId, user);
   res.cookie("uid", sessionId);
   return res.redirect("/");
 }

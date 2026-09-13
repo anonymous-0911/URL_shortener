@@ -4,7 +4,31 @@
     <style>
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 0 20px;
+        color: #222;
       }
+      h1 { margin-bottom: 20px; }
+      label { display: block; margin-top: 10px; font-weight: 600; }
+      input[type="text"] {
+        display: block;
+        width: 100%;
+        padding: 6px 8px;
+        margin-top: 4px;
+        box-sizing: border-box;
+        border: 1px solid #999;
+      }
+      button {
+        margin-top: 14px;
+        padding: 8px 20px;
+        cursor: pointer;
+      }
+      table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+      th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+      th { background: #f5f5f5; }
+      .msg-success { color: green; }
+      .msg-error { color: red; }
     </style>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,19 +36,29 @@
     <title>Home Page</title>
   </head>
   <body>
-    <h1>URL Shortener</h1>
+    <h1>URL Shortener</h1> <a href="/login">Logout</a>
     <% if (locals.id) { %>
-    <p>URL Generated: http://localhost:8001/url/<%= id %></p>
+    <p class="msg-success">URL Generated: <a href="/url/<%= id %>" target="_blank">/url/<%= id %></a></p>
+    <% } %>
+
+    <% if (locals.error) { %>
+    <p class="msg-error"><%= error %></p>
     <% } %>
 
     <div>
       <form method="POST" action="/url">
-        <label>Enter Your Original URL</label>
-        <input type="text" name="url" placeholder="https://example.com" />
+        <div>
+          <label>Enter Your Original URL:</label>
+          <input type="text" name="url" required placeholder="https://example.com" />
+        </div>
+        <div>
+          <label>Custom Alias (Optional):</label>
+          <input type="text" name="customAlias" placeholder="e.g. my-custom-link" />
+        </div>
         <button type="submit">Generate</button>
       </form>
     </div>
-    <div style="margin-top: 30px">
+    <div>
       <% if (locals.urls) { %>
       <table>
         <thead>

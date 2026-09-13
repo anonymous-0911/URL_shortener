@@ -4,7 +4,27 @@
     <style>
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        max-width: 400px;
+        margin: 40px auto;
+        padding: 0 20px;
+        color: #222;
       }
+      h1 { margin-bottom: 20px; }
+      label { display: block; margin-top: 10px; font-weight: 600; }
+      input[type="text"] {
+        display: block;
+        width: 100%;
+        padding: 6px 8px;
+        margin-top: 4px;
+        box-sizing: border-box;
+        border: 1px solid #999;
+      }
+      button {
+        margin-top: 14px;
+        padding: 8px 20px;
+        cursor: pointer;
+      }
+      a { display: block; margin-top: 14px; }
     </style>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -20,6 +40,7 @@
       <input type="text" required name="password" />
 
       <button type="submit">Login</button>
+      <a href="/signup">Don't have an account? Signup</a>
     </form>
   </body>
 </html>
