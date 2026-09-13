@@ -7,12 +7,13 @@ const limiter = rateLimit({
 	standardHeaders: 'draft-8', // draft-6: `RateLimit-*` headers; draft-7 & draft-8: combined `RateLimit` header
 	legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
 	ipv6Subnet: 56, 
-  handler:(req,res)=>{
-    const retryAfterSeconds = Math.ceil(req.rateLimit.resetTime / 1000);
+  handler: (req, res) => {
+    const resetMs = req.rateLimit.resetTime ? req.rateLimit.resetTime.getTime() : Date.now() + 15 * 60 * 1000;
+    const retryAfterSeconds = Math.max(0, Math.ceil((resetMs - Date.now()) / 1000));
     res.status(429).json({
-        error: "Too many requests",
-        retryAfterSeconds: retryAfterSeconds
-    })
+      error: "Too many requests",
+      retryAfterSeconds: retryAfterSeconds
+    });
   }
  
 })
