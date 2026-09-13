@@ -13,7 +13,13 @@ async function getUser(sessionId) {
   return user;
 }
 
+async function deleteSession(sessionId) {
+  if (!sessionId) return;
+  await Session.deleteOne({ sessionId });
+}
+
 module.exports = {
   setUser,
   getUser,
+  deleteSession,
 };

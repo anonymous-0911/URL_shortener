@@ -36,7 +36,7 @@
     <title>Home Page</title>
   </head>
   <body>
-    <h1>URL Shortener</h1> <a href="/login">Logout</a>
+    <h1>URL Shortener</h1> <a href="/logout">Logout</a>
     <% if (locals.id) { %>
     <p class="msg-success">URL Generated: <a href="/url/<%= id %>" target="_blank">/url/<%= id %></a></p>
     <% } %>

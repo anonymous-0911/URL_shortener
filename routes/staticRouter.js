@@ -1,5 +1,6 @@
 const express = require("express");
 const URL = require("../models/url");
+const { handleUserLogout } = require("../controllers/user");
 
 const router = express.Router();
 
@@ -18,5 +19,7 @@ router.get("/signup", (req, res) => {
 router.get("/login", (req, res) => {
   return res.render("login");
 });
+
+router.get("/logout", handleUserLogout);
 
 module.exports = router;

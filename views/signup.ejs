@@ -24,6 +24,7 @@
         padding: 8px 20px;
         cursor: pointer;
       }
+      .msg-error { color: red; margin-top: 10px; }
     </style>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -32,6 +33,9 @@
   </head>
   <body>
     <h1>Signup</h1>
+    <% if (locals.error) { %>
+    <p class="msg-error"><%= error %></p>
+    <% } %>
     <form action="/user" method="post">
       <label>Full Name</label>
       <input type="text" required name="name" />
