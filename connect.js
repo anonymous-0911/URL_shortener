@@ -1,16 +1,11 @@
 const mongoose = require("mongoose");
-const dns = require("dns");
 
-// Configure public DNS resolvers to handle SRV record lookups for MongoDB Atlas
-try {
-  dns.setServers(["8.8.8.8", "1.1.1.1"]);
-} catch (e) {
-  // Ignore if custom DNS cannot be set
-}
+let cached = null;
 
-mongoose.set("strictQuery", true);
 async function connectToMongoDB(url) {
-  return mongoose.connect(url);
+  if (cached) return cached;
+  cached = await mongoose.connect(url);
+  return cached;
 }
 
 module.exports = {
